@@ -12,6 +12,11 @@ namespace AssetStudio
             helper.AddMonoBehaviour(m_Type.m_Nodes, 0);
             if (m_MonoBehaviour.m_Script.TryGet(out var m_Script))
             {
+                if(!m_Script.m_AssemblyName.EndsWith(".dll"))
+				{
+                    m_Script.m_AssemblyName += ".dll";
+
+                }
                 var typeDef = assemblyLoader.GetTypeDefinition(m_Script.m_AssemblyName, string.IsNullOrEmpty(m_Script.m_Namespace) ? m_Script.m_ClassName : $"{m_Script.m_Namespace}.{m_Script.m_ClassName}");
                 if (typeDef != null)
                 {
